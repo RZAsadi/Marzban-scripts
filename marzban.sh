@@ -7,6 +7,7 @@ if [ -z "$APP_NAME" ]; then
 fi
 APP_DIR="$INSTALL_DIR/$APP_NAME"
 DATA_DIR="/var/lib/$APP_NAME"
+THEMES_DIR="$APP_DIR/themes"
 COMPOSE_FILE="$APP_DIR/docker-compose.yml"
 ENV_FILE="$APP_DIR/.env"
 LAST_XRAY_CORES=10
@@ -129,6 +130,7 @@ install_marzban_script() {
     curl -sSL $SCRIPT_URL | install -m 755 /dev/stdin /usr/local/bin/marzban
     colorized_echo green "marzban script installed successfully"
 }
+
 
 is_marzban_installed() {
     if [ -d $APP_DIR ]; then
@@ -1011,6 +1013,8 @@ install_command() {
         echo "Invalid version format. Please enter a valid version (e.g. v0.5.2)"
         exit 1
     fi
+    install_theme
+    install_completion
     up_marzban
     follow_marzban_logs
 }
@@ -1141,6 +1145,8 @@ uninstall_command() {
     if is_marzban_up; then
         down_marzban
     fi
+    uninstall_completion
+    uninstall_theme
     uninstall_marzban_script
     uninstall_marzban
     uninstall_marzban_docker_images
@@ -1431,6 +1437,60 @@ edit_env_command() {
     fi
 }
 
+generate_completion() {
+    cat <<'EOF'
+_marzban_completions()
+{
+    local cur cmds
+    COMPREPLY=()
+    cur="${COMP_WORDS[COMP_CWORD]}"
+    cmds="up down restart status logs cli install update uninstall install-script backup backup-service core-update edit edit-env help completion"
+    COMPREPLY=( $(compgen -W "$cmds" -- "$cur") )
+    return 0
+}
+complete -F _marzban_completions marzban marzban.sh
+EOF
+}
+
+install_completion() {
+    local completion_dir="/etc/bash_completion.d"
+    local completion_file="$completion_dir/marzban"
+    mkdir -p "$completion_dir"
+    generate_completion > "$completion_file"
+    colorized_echo green "Bash completion installed to $completion_file"
+}
+
+uninstall_completion() {
+    local completion_dir="/etc/bash_completion.d"
+    local completion_file="$completion_dir/marzban"
+    if [ -f "$completion_file" ]; then
+        rm "$completion_file"
+        colorized_echo yellow "Bash completion removed from $completion_file"
+    fi
+}
+
+install_theme() {
+    local theme_url="https://github.com/Gozargah/Marzban-Themes/archive/refs/heads/main.tar.gz"
+    mkdir -p "$THEMES_DIR"
+    local tmp_dir
+    tmp_dir=$(mktemp -d)
+    if command -v curl >/dev/null 2>&1; then
+        curl -sL "$theme_url" -o "$tmp_dir/theme.tar.gz"
+    else
+        wget -qO "$tmp_dir/theme.tar.gz" "$theme_url"
+    fi
+    tar -xzf "$tmp_dir/theme.tar.gz" -C "$tmp_dir"
+    cp -r "$tmp_dir"/* "$THEMES_DIR"/
+    rm -rf "$tmp_dir"
+}
+
+uninstall_theme() {
+    if [ -d "$THEMES_DIR" ]; then
+        rm -rf "$THEMES_DIR"
+        colorized_echo yellow "Removed directory: $THEMES_DIR"
+    fi
+}
+
 usage() {
     local script_name="${0##*/}"
     colorized_echo blue "=============================="
@@ -1498,6 +1558,8 @@ case "$1" in
         shift; edit_command "$@";;
     edit-env)
         shift; edit_env_command "$@";;
+    completion)
+        generate_completion;;
     help|*)
         usage;;
 esac

@@ -579,6 +579,7 @@ install_command() {
         exit 1
     fi
     install_gozargah_node_script
+    install_completion
     up_gozargah_node
     show_gozargah_node_logs
 
@@ -613,6 +614,7 @@ uninstall_command() {
     if is_gozargah_node_up; then
         down_gozargah_node
     fi
+    uninstall_completion
     uninstall_gozargah_node_script
     uninstall_gozargah_node
     uninstall_gozargah_node_docker_images
@@ -1133,6 +1135,38 @@ edit_command() {
     fi
 }
 
+generate_completion() {
+    cat <<'EOF'
+_gozargah_node_completions()
+{
+    local cur cmds
+    COMPREPLY=()
+    cur="${COMP_WORDS[COMP_CWORD]}"
+    cmds="up down restart status logs install update uninstall install-script uninstall-script core-update edit completion"
+    COMPREPLY=( $(compgen -W "$cmds" -- "$cur") )
+    return 0
+}
+complete -F _gozargah_node_completions gozargah-node.sh "$APP_NAME"
+EOF
+}
+
+install_completion() {
+    local completion_dir="/etc/bash_completion.d"
+    local completion_file="$completion_dir/$APP_NAME"
+    mkdir -p "$completion_dir"
+    generate_completion > "$completion_file"
+    colorized_echo green "Bash completion installed to $completion_file"
+}
+
+uninstall_completion() {
+    local completion_dir="/etc/bash_completion.d"
+    local completion_file="$completion_dir/$APP_NAME"
+    if [ -f "$completion_file" ]; then
+        rm "$completion_file"
+        colorized_echo yellow "Bash completion removed from $completion_file"
+    fi
+}
+
 usage() {
     colorized_echo blue "================================"
     colorized_echo magenta "       $APP_NAME Node CLI Help"
@@ -1219,6 +1253,9 @@ uninstall-script)
     ;;
 edit)
     edit_command
+    ;;
+completion)
+    generate_completion
     ;;
 *)
     usage
