@@ -1374,8 +1374,9 @@ update_command() {
     fi
     
     detect_compose
-    
+
     update_marzban_script
+    install_completion
     colorized_echo blue "Pulling latest version"
     update_marzban
     
@@ -1446,13 +1447,13 @@ _marzban_completions()
     COMPREPLY=( $(compgen -W "$cmds" -- "$cur") )
     return 0
 }
-complete -F _marzban_completions marzban marzban.sh
 EOF
+    echo "complete -F _marzban_completions marzban.sh \"$APP_NAME\""
 }
 
 install_completion() {
     local completion_dir="/etc/bash_completion.d"
-    local completion_file="$completion_dir/marzban"
+    local completion_file="$completion_dir/$APP_NAME"
     mkdir -p "$completion_dir"
     generate_completion > "$completion_file"
     colorized_echo green "Bash completion installed to $completion_file"
@@ -1460,7 +1461,7 @@ install_completion() {
 
 uninstall_completion() {
     local completion_dir="/etc/bash_completion.d"
-    local completion_file="$completion_dir/marzban"
+    local completion_file="$completion_dir/$APP_NAME"
     if [ -f "$completion_file" ]; then
         rm "$completion_file"
         colorized_echo yellow "Bash completion removed from $completion_file"

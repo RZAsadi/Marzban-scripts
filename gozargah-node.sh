@@ -831,6 +831,7 @@ update_command() {
     detect_compose
 
     update_gozargah_node_script
+    install_completion
     colorized_echo blue "Pulling latest version"
     update_gozargah_node
 
@@ -1146,8 +1147,8 @@ _gozargah_node_completions()
     COMPREPLY=( $(compgen -W "$cmds" -- "$cur") )
     return 0
 }
-complete -F _gozargah_node_completions gozargah-node.sh "$APP_NAME"
 EOF
+    echo "complete -F _gozargah_node_completions gozargah-node.sh \"$APP_NAME\""
 }
 
 install_completion() {
