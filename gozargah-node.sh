@@ -498,6 +498,10 @@ install_command() {
             gozargah_node_version_set="true"
             shift
             ;;
+        --name)
+            # --name is handled globally; ignore here to prevent unknown option errors
+            shift 2
+            ;;
         *)
             echo "Unknown option: $1"
             exit 1
