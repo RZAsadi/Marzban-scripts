@@ -708,7 +708,7 @@ install_marzban() {
         exit 1
     fi
 
-    FILES_URL_PREFIX="https://raw.githubusercontent.com/Gozargah/Marzban/"
+    FILES_URL_PREFIX="https://raw.githubusercontent.com/RZAsadi/Marzban/"
     COMPOSE_FILES_URL_PREFIX="https://raw.githubusercontent.com/ImMohammad20000/Marzban-scripts/master"
 
     mkdir -p "$DATA_DIR"
@@ -956,7 +956,7 @@ install_command() {
     # Function to check if a version exists in the GitHub releases
     check_version_exists() {
         local version=$1
-        repo_url="https://api.github.com/repos/Gozargah/Marzban/releases"
+        repo_url="https://api.github.com/repos/RZAsadi/Marzban/releases"
 
         if [ "$version" == "latest" ]; then
             latest_tag=$(curl -s ${repo_url}/latest | jq -r '.tag_name')
