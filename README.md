@@ -18,35 +18,35 @@
 - **Install Marzban with SQLite**:
 
   ```bash
-  sudo bash -c "$(curl -sL https://github.com/ImMohammad20000/Marzban-scripts/raw/master/marzban.sh)" @ install
+  sudo bash -c "$(curl -sL https://github.com/RZAsadi/Marzban-scripts/raw/master/marzban.sh)" @ install
   ```
 
 - **Install Marzban with MySQL**:
 
   ```bash
-  sudo bash -c "$(curl -sL https://github.com/ImMohammad20000/Marzban-scripts/raw/master/marzban.sh)" @ install --database mysql
+  sudo bash -c "$(curl -sL https://github.com/RZAsadi/Marzban-scripts/raw/master/marzban.sh)" @ install --database mysql
   ```
 - **Install Marzban with PostgreSQL(v1+ only)**:
 
   ```bash
-  sudo bash -c "$(curl -sL https://github.com/ImMohammad20000/Marzban-scripts/raw/master/marzban.sh)" @ install --database postgresql
+  sudo bash -c "$(curl -sL https://github.com/RZAsadi/Marzban-scripts/raw/master/marzban.sh)" @ install --database postgresql
   ```
 - **Install Marzban with TimescaleDB(v1+ only) and pre-release version**:
 
   ```bash
-  sudo bash -c "$(curl -sL https://github.com/ImMohammad20000/Marzban-scripts/raw/master/marzban.sh)" @ install --database timescaledb --pre-release
+  sudo bash -c "$(curl -sL https://github.com/RZAsadi/Marzban-scripts/raw/master/marzban.sh)" @ install --database timescaledb --pre-release
   ```
 
 - **Install Marzban with MariaDB and Dev branch**:
 
   ```bash
-  sudo bash -c "$(curl -sL https://github.com/ImMohammad20000/Marzban-scripts/raw/master/marzban.sh)" @ install --database mariadb --dev
+  sudo bash -c "$(curl -sL https://github.com/RZAsadi/Marzban-scripts/raw/master/marzban.sh)" @ install --database mariadb --dev
   ```
 
 - **Install Marzban with MariaDB and Manual version**:
 
   ```bash
-  sudo bash -c "$(curl -sL https://github.com/ImMohammad20000/Marzban-scripts/raw/master/marzban.sh)" @ install --database mariadb --version v0.5.2
+  sudo bash -c "$(curl -sL https://github.com/RZAsadi/Marzban-scripts/raw/master/marzban.sh)" @ install --database mariadb --version v0.5.2
   ```
 ## Installing Gozargah-node
 
@@ -54,20 +54,20 @@
 
 - **Install Gozargah-node**
   ```bash
-  sudo bash -c "$(curl -sL https://github.com/ImMohammad20000/Marzban-scripts/raw/master/gozargah-node.sh)" @ install
+  sudo bash -c "$(curl -sL https://github.com/RZAsadi/Marzban-scripts/raw/master/gozargah-node.sh)" @ install
   ```
 - **Install Gozargah-node Manual version:**
   ```bash
-  sudo bash -c "$(curl -sL https://github.com/ImMohammad20000/Marzban-scripts/raw/master/gozargah-node.sh)" @ install --version 0.1.0
+  sudo bash -c "$(curl -sL https://github.com/RZAsadi/Marzban-scripts/raw/master/gozargah-node.sh)" @ install --version 0.1.0
   ```
 - **Install Gozargah-node pre-release version:**
   ```bash
-  sudo bash -c "$(curl -sL https://github.com/ImMohammad20000/Marzban-scripts/raw/master/gozargah-node.sh)" @ install --pre-release
+  sudo bash -c "$(curl -sL https://github.com/RZAsadi/Marzban-scripts/raw/master/gozargah-node.sh)" @ install --pre-release
   ```
 
 - **Install Gozargah-node with custom name:**
   ```bash
-  sudo bash -c "$(curl -sL https://github.com/ImMohammad20000/Marzban-scripts/raw/master/gozargah-node.sh)" @ install --name gozargah-node2
+  sudo bash -c "$(curl -sL https://github.com/RZAsadi/Marzban-scripts/raw/master/gozargah-node.sh)" @ install --name gozargah-node2
   ```
     > 📌 **Tip:**  
     > The `--name` flag lets you install and manage multiple Gozargah-node instances using this script.  
@@ -96,11 +96,11 @@ Use `help` to view all commands:
 
 - **Install Marzban-node**
   ```bash
-  sudo bash -c "$(curl -sL https://github.com/ImMohammad20000/Marzban-scripts/raw/master/marzban-node.sh)" @ install
+  sudo bash -c "$(curl -sL https://github.com/RZAsadi/Marzban-scripts/raw/master/marzban-node.sh)" @ install
   ```
 - **Install Marzban-node with custom name:**
   ```bash
-  sudo bash -c "$(curl -sL https://github.com/ImMohammad20000/Marzban-scripts/raw/master/marzban-node.sh)" @ install --name marzban-node2
+  sudo bash -c "$(curl -sL https://github.com/RZAsadi/Marzban-scripts/raw/master/marzban-node.sh)" @ install --name marzban-node2
   ```
     > 📌 **Tip:**  
     > The `--name` flag lets you install and manage multiple Marzban-node instances using this script.  
